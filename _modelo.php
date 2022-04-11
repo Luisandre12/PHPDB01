@@ -1,9 +1,31 @@
 <?php
 
+/**
+ * Arquivo que faz a configuração incial da página.
+ * Por exemplo, conecta-se ao banco de dados.
+ */
+require($_SERVER['DOCUMENT_ROOT'] . '/_config.php');
+
+
+/**
+ *Variável que define o título desta página
+ *Referências:
+ * → https://www.w3schools.com/php/php_variables.asp
+ * → https://www.php.net/manual/pt_BR/language.variables.basics.php
+ * → https://www.php.net/manual/pt_BR/language.variables.superglobals.php
+ */
+    $title = "Quem tem fome tem pressa...";
     //inclui o cabeçalo da página e se de erro vai para o programa.
-    require('header.php');
+    require($_SERVER['DOCUMENT_ROOT'] . '/_header.php');
 
     //inclui o cabeçalo da página e se de erro vai continuar o programa.
+/**
+ *Inclui o cabeçalho da página 
+ *Referências:
+ * → https://www.w3schools.com/php/php_includes.asp
+ * → https://www.php.net/manual/pt_BR/function.include.php
+ * → https://www.php.net/manual/pt_BR/language.variables.superglobals.php
+ */
     //include('_header.php');
 
 ?>    
@@ -24,7 +46,7 @@
 <?php
 
     //inclui o rodapé da página e se de erro vai para o programa.
-    require('_footer.php');
+    require($_SERVER['DOCUMENT_ROOT'] . '/_footer.php');
 
     
     //inclui o rodapé da página e se de erro vai continuar o programa.
