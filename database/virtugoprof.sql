@@ -1,17 +1,17 @@
--- Apaga o banco de dados caso exista
-DROP DATABASE
+-- Apaga o banco de dados caso exista.
+DROP DATABASE IF EXISTS vitugo;
 
--- cria banco de dados
+-- Cria o banco de dados
 CREATE DATABASE vitugo CHARACTER SET utf8 COLLATE utf8_general_ci;
 
--- seleciona banco de dados
-use virtugo
+-- Seleciona banco de dados.
+USE vitugo;
 
--- Cria tabela usúarios/autores no banco de dados
-CREATE table  users (
-    user_id int primary key auto_increment,
-    user_name varchar(255),
-    user_email varchar(255),
+-- Cria tabela de usuários/autores.
+CREATE TABLE users (
+    user_id INT PRIMARY KEY AUTO_INCREMENT,
+    user_name VARCHAR(255),
+    user_email VARCHAR(255),
     user_birth DATE,
     user_photo VARCHAR(255),
     user_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -20,28 +20,29 @@ CREATE table  users (
     user_status ENUM('on', 'off', 'deleted') DEFAULT 'on'
 );
 
--- cria tabela artigos no banco de dados
-CREATE table articles (
-    art_id int primary key auto_increment,
-    art_title varchar(255),
-    art_intro varchar(255),
-    art_thumb varchar(255),
+-- Cria tabela de artigos
+CREATE TABLE articles (
+    art_id INT PRIMARY KEY AUTO_INCREMENT,
+    art_title VARCHAR(127),
+    art_intro VARCHAR(255),
+    art_thumb VARCHAR(255),
     art_content TEXT,
+    art_author INT,
     art_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     art_status ENUM('on', 'off', 'deleted') DEFAULT 'on',
     FOREIGN KEY (art_author) REFERENCES users (user_id)
 );
 
--- cria tabela comentarios no banco de dados
-CREATE table comments (
-    cmt_id int primary key auto_increment
-    cmt_article int,
-    cmt_author int,
-    cmt_date TIMESTAMP default CURRENT_TIMESTAMP,
-    cmt_status ENUM('on', 'off', 'deleted') default 'on',
-    FOREIGN key (cmt_article) REFERENCES articles (art_id),
-    FOREIGN key (cmt_author) REFERENCES articles (user_id)    
-); 
+-- Cria tabela de comentários nos artigos
+CREATE TABLE comments (
+    cmt_id INT PRIMARY KEY AUTO_INCREMENT,
+    cmt_article INT,
+    cmt_author INT,
+    cmt_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    cmt_status ENUM('on', 'off', 'deleted') DEFAULT 'on',
+    FOREIGN KEY (cmt_article) REFERENCES articles (art_id),
+    FOREIGN KEY (cmt_author) REFERENCES users (user_id)
+);
 
 -- Cria tabela com contatos do site
 CREATE TABLE contacts (
@@ -54,13 +55,15 @@ CREATE TABLE contacts (
     status ENUM('on', 'off', 'deleted') DEFAULT 'on'
 );
 
+
 -- Insere dados em 'users'
 INSERT INTO users (
     user_name,
     user_email,
     user_birth,
     user_photo,
-    user_profile
+    user_profile,
+    user_type
 ) VALUES 
 (
     'Setembrino Trocatapas',
@@ -86,7 +89,6 @@ INSERT INTO users (
     'Motorista, eletricista, ortopedista e horista.',
     'admin'
 );
-
 
 -- Insere dados em 'articles'
 INSERT INTO articles (
