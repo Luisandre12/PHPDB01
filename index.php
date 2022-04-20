@@ -35,12 +35,12 @@ while ($artigo = $res->fetch_assoc()) :
 <div class="item">
 
     <div>
-        <a href="/ver?{$artigo['art_id']}">
+        <a href="/ler/?{$artigo['art_id']}">
             <img src="{$artigo['art_thumb']}" alt="{$artigo['art_title']}">
         </a>
     </div>
     <div>
-        <h3><a href="/ver?{$artigo['art_id']}">{$artigo['art_title']}</a></h3>
+        <h3><a href="/ler/?{$artigo['art_id']}">{$artigo['art_title']}</a></h3>
         {$artigo['art_intro']}
     </div>
 
