@@ -6,31 +6,41 @@
  */
 require($_SERVER['DOCUMENT_ROOT'] . '/_config.php');
 
+/***********************************************
+ * Seus códigos PHP desta página iniciam aqui! *
+ ***********************************************/
+
+
+/************************************************
+ * Seus códigos PHP desta página terminam aqui! *
+ ************************************************/
 
 /**
- *Variável que define o título desta página
- *Referências:
- * → https://www.w3schools.com/php/php_variables.asp
- * → https://www.php.net/manual/pt_BR/language.variables.basics.php
- * → https://www.php.net/manual/pt_BR/language.variables.superglobals.php
+ * Variável que define o título desta página.
+ * Essa variável é usada no arquivo "_header.php".
+ * OBS: para a página inicial (index.php) usaremos o 'slogan' do site.
+ *     Referências:
+ *     → https://www.w3schools.com/php/php_variables.asp
+ *     → https://www.php.net/manual/pt_BR/language.variables.basics.php
  */
-    $title = "Faça contato";
-    //inclui o cabeçalo da página e se de erro vai para o programa.
-    require($_SERVER['DOCUMENT_ROOT'] . '/_header.php');
+$title = "Faça contato";
 
-    //inclui o cabeçalo da página e se de erro vai continuar o programa.
 /**
- *Inclui o cabeçalho da página 
- *Referências:
- * → https://www.w3schools.com/php/php_includes.asp
- * → https://www.php.net/manual/pt_BR/function.include.php
- * → https://www.php.net/manual/pt_BR/language.variables.superglobals.php
+ * Inclui o cabeçalho da página.
+ * A superglobal "$_SERVER['DOCUMENT_ROOT']" retorna o caminho da raiz do site no Windows.
+ * Ex.: C:\xampp\htdocs 
+ *     Referências:
+ *     → https://www.w3schools.com/php/php_includes.asp
+ *     → https://www.php.net/manual/pt_BR/function.include.php
+ *     → https://www.php.net/manual/pt_BR/language.variables.superglobals.php
  */
-    //include('_header.php');
+require($_SERVER['DOCUMENT_ROOT'] . '/_header.php');
 
-?>    
+?>
+
 <section>
-<h2>Faça contato</h2>
+
+    <h2>Faça contato</h2>
 
     <form action="envia.php" method="post">
 
@@ -38,52 +48,45 @@ require($_SERVER['DOCUMENT_ROOT'] . '/_config.php');
 
         <p>
             <label for="nome">Nome:</label>
-            <input type="text" name="nome" id="nome" required minlength="3" value="Joca da Silva">
+            <input type="text" name="nome" id="nome" required minlength="3">
+            <!-- O campo é obrigatório (required) e deve ter pelo menos 3 caracteres. -->
         </p>
 
         <p>
             <label for="emil">E-mail:</label>
-            <input type="email" name="email" id="email" required value="joca@silva">
+            <input type="email" name="email" id="email" required>
+            <!-- O campo é obrigatório e deve ser um e-mail (type="email"). --> 
         </p>
 
         <p>
             <label for="assunto">Assunto:</label>
-            <input type="text" name="assunto" id="assunto" required minlength="5" value="Assunto do Joca">
+            <input type="text" name="assunto" id="assunto" required minlength="5">
+            <!-- O campo é obrigatório e deve ter pelo menos 5 caracteres. -->
         </p>
 
         <p>
             <label for="mensagem">Mensagem:</label>
-            <textarea name="mensagem" id="mensagem" required minlength="5">Mensagem do Joca</textarea>
+            <textarea name="mensagem" id="mensagem" required minlength="5"></textarea>
+            <!-- O campo é obrigatório e deve ter pelo menos 5 caracteres. -->
         </p>
 
         <p>
             <button type="submit">Enviar</button>
         </p>
 
-
-
-
     </form>
-
-
-
 
 </section>
 
 <aside>
 
-<h3>Lateral</h3>
-<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum, iste aliqu</p>
+    <h3>Lateral</h3>
+    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Officia, aperiam corporis culpa consequatur
+        iusto.</p>
 
 </aside>
 
 <?php
 
-    //inclui o rodapé da página e se de erro vai para o programa.
-    require($_SERVER['DOCUMENT_ROOT'] . '/_footer.php');
-
-    
-    //inclui o rodapé da página e se de erro vai continuar o programa.
-    //include('_header.php')
-
-?>
+// Inclui o rodapé da página
+require($_SERVER['DOCUMENT_ROOT'] . '/_footer.php');

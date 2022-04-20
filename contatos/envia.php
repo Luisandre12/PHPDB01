@@ -47,7 +47,7 @@ HTML;
          * Salva dados no banco de dados.
          */
 
-        // Query de escrita no banco
+        // Query de escrita no banco.
         $sql = <<<SQL
 
 INSERT INTO contacts (
@@ -67,20 +67,53 @@ SQL;
         // Escreve no banco de dados
         $conn->query($sql);
 
-        
+        /**
+         * Obtém o primeiro nome do remetente.
+         */
+
+        // Gera um array com as partes do nome.
+        // $parts[0] contém o primeiro nome.
+        $parts = explode(' ', $nome);
 
         // Abradecer ao usuário
         $feedback = <<<HTML
 
-
+<h3>Olá {$parts[0]}!</h3>
+<p>Seu contato foi enviado com sucesso.</p>
+<p><em>Obrigado...</em></p>
+<p><button onclick="location.href = '/'"><i class="fa-solid fa-house-chimney"></i> Página inicial</button></p>    
 
 HTML;
+
+        /**
+         * Envia e-mail para o administrador do site.
+         * ATENÇÃO! Não funciona em redes locais. Só em provedores pagos.
+         */
+
+        // Mensagem do e-mail
+        $mail_message = <<<TXT
+
+Novo contato enviado para Vitugo:
+
+ - Remetente: {$nome}
+ - E-mail: {$email}
+ - Assunto: {$assunto}
+ - Mensagem:
+ {$mensagem}
+
+Obrigado...
+
+TXT;
+
+        // Enviando e-mail para 'admin@vitugo.com'.
+        // O '@' oculta mensagens de erro. MUITO CUIDADO!!!
+        @mail('admin@vitugo.com', 'Um contato foi enviado.', $mail_message);
     }
 } else {
 
     /**
-     * Se o formulário NÃO foi enviado
-     * sai desta página e mostra o formulário para o usuário.
+     * Se o formulário NÃO foi enviado, sai desta página e
+     * mostra o formulário para o usuário.
      */
     header('Location: index.php');
 }
