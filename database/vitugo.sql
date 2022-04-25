@@ -1,17 +1,17 @@
--- Apaga o banco de dados caso exista
-DROP DATABASE
+-- Apaga o banco de dados caso exista.
+DROP DATABASE IF EXISTS vitugo;
 
--- cria banco de dados
+-- Cria o banco de dados
 CREATE DATABASE vitugo CHARACTER SET utf8 COLLATE utf8_general_ci;
 
--- seleciona banco de dados
-use virtugo
+-- Seleciona banco de dados.
+USE vitugo;
 
--- Cria tabela usúarios/autores no banco de dados
-CREATE table  users (
-    user_id int primary key auto_increment,
-    user_name varchar(255),
-    user_email varchar(255),
+-- Cria tabela de usuários/autores.
+CREATE TABLE users (
+    user_id INT PRIMARY KEY AUTO_INCREMENT,
+    user_name VARCHAR(255),
+    user_email VARCHAR(255),
     user_birth DATE,
     user_photo VARCHAR(255),
     user_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -20,28 +20,29 @@ CREATE table  users (
     user_status ENUM('on', 'off', 'deleted') DEFAULT 'on'
 );
 
--- cria tabela artigos no banco de dados
-CREATE table articles (
-    art_id int primary key auto_increment,
-    art_title varchar(255),
-    art_intro varchar(255),
-    art_thumb varchar(255),
+-- Cria tabela de artigos
+CREATE TABLE articles (
+    art_id INT PRIMARY KEY AUTO_INCREMENT,
+    art_title VARCHAR(127),
+    art_intro VARCHAR(255),
+    art_thumb VARCHAR(255),
     art_content TEXT,
+    art_author INT,
     art_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     art_status ENUM('on', 'off', 'deleted') DEFAULT 'on',
     FOREIGN KEY (art_author) REFERENCES users (user_id)
 );
 
--- cria tabela comentarios no banco de dados
-CREATE table comments (
-    cmt_id int primary key auto_increment
-    cmt_article int,
-    cmt_author int,
-    cmt_date TIMESTAMP default CURRENT_TIMESTAMP,
-    cmt_status ENUM('on', 'off', 'deleted') default 'on',
-    FOREIGN key (cmt_article) REFERENCES articles (art_id),
-    FOREIGN key (cmt_author) REFERENCES articles (user_id)    
-); 
+-- Cria tabela de comentários nos artigos
+CREATE TABLE comments (
+    cmt_id INT PRIMARY KEY AUTO_INCREMENT,
+    cmt_article INT,
+    cmt_author INT,
+    cmt_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    cmt_status ENUM('on', 'off', 'deleted') DEFAULT 'on',
+    FOREIGN KEY (cmt_article) REFERENCES articles (art_id),
+    FOREIGN KEY (cmt_author) REFERENCES users (user_id)
+);
 
 -- Cria tabela com contatos do site
 CREATE TABLE contacts (
@@ -60,7 +61,8 @@ INSERT INTO users (
     user_email,
     user_birth,
     user_photo,
-    user_profile
+    user_profile,
+    user_type
 ) VALUES 
 (
     'Setembrino Trocatapas',
@@ -85,8 +87,23 @@ INSERT INTO users (
     'https://randomuser.me/api/portraits/lego/5.jpg',
     'Motorista, eletricista, ortopedista e horista.',
     'admin'
+),
+(
+    'Juanita Malita',
+    'nitamalita@gmail.com',
+    '1991-10-12',
+    'https://randomuser.me/api/portraits/lego/1.jpg',
+    'Motorista, eletricista, ortopedista e horista.',
+    'author'
+),
+(
+    'Genesito Malito',
+    'genemalito@google.com',
+    '2000-11-01',
+    'https://randomuser.me/api/portraits/lego/2.jpg',
+    'Motorista, eletricista, ortopedista e horista.',
+    'author'
 );
-
 
 -- Insere dados em 'articles'
 INSERT INTO articles (
@@ -116,4 +133,34 @@ INSERT INTO articles (
     'https://picsum.photos/99',
     '<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto fugiat, nesciunt iure porro aliquid id consequuntur nisi placeat assumenda vero magni repellendus possimus corporis sed, quaerat totam? Veniam, pariatur ex?</p><p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Inventore sunt quo nam commodi repudiandae voluptas excepturi est aut iste veniam. Itaque possimus ullam eius quaerat? Quam aliquam eius corporis ut!</p><img src="https://picsum.photos/400/300" alt="Imagem aleátória"><p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad quisquam amet, sunt, magnam debitis aliquam voluptates eius veniam explicabo molestias enim illo quam exercitationem ducimus vel eos eligendi aut libero.</p><ul><li><a href="https://guithub.com/Luferat">GitHub do Fessô</a></li><li><a href="http://catabits.com.br">Blog do Fessô</a></li><li><a href="https://bit.ly/LuferatMeet">Google Meet do Fessô</a></li></ul><p>Lorem ipsum dolor sit amet consectetur adipisicing elit. At itaque deserunt perferendis sit voluptatum sunt, minus labore ratione modi nesciunt distinctio temporibus amet omnis sapiente, dicta repudiandae ipsum, eaque deleniti!</p><p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptas quos quasi quis pariatur iure officia ab, eius beatae, fuga, in dolores neque possimus necessitatibus nostrum nulla expedita tempore harum tenetur?</p>',
     '1'
+);
+
+-- Insere dados em 'articles'
+INSERT INTO articles (
+    art_title,
+    art_intro,
+    art_thumb,
+    art_content,
+    art_author
+) VALUES
+(
+    'É assim que se faz isso',
+    'Aprenda como fazer para apreder o que fazer, sabendo o que fazer.',
+    'https://picsum.photos/98',
+    '<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto fugiat, nesciunt iure porro aliquid id consequuntur nisi placeat assumenda vero magni repellendus possimus corporis sed, quaerat totam? Veniam, pariatur ex?</p><p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Inventore sunt quo nam commodi repudiandae voluptas excepturi est aut iste veniam. Itaque possimus ullam eius quaerat? Quam aliquam eius corporis ut!</p><img src="https://picsum.photos/400/300" alt="Imagem aleátória"><p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad quisquam amet, sunt, magnam debitis aliquam voluptates eius veniam explicabo molestias enim illo quam exercitationem ducimus vel eos eligendi aut libero.</p><ul><li><a href="https://guithub.com/Luferat">GitHub do Fessô</a></li><li><a href="http://catabits.com.br">Blog do Fessô</a></li><li><a href="https://bit.ly/LuferatMeet">Google Meet do Fessô</a></li></ul><p>Lorem ipsum dolor sit amet consectetur adipisicing elit. At itaque deserunt perferendis sit voluptatum sunt, minus labore ratione modi nesciunt distinctio temporibus amet omnis sapiente, dicta repudiandae ipsum, eaque deleniti!</p><p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptas quos quasi quis pariatur iure officia ab, eius beatae, fuga, in dolores neque possimus necessitatibus nostrum nulla expedita tempore harum tenetur?</p>',
+    '4'
+),
+(
+    'A arte de fazer sem que se faça',
+    'Dessa forma que fazermos aquilo que deve ser feito sem que seja necessário fazer.',
+    'https://picsum.photos/102',
+    '<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto fugiat, nesciunt iure porro aliquid id consequuntur nisi placeat assumenda vero magni repellendus possimus corporis sed, quaerat totam? Veniam, pariatur ex?</p><p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Inventore sunt quo nam commodi repudiandae voluptas excepturi est aut iste veniam. Itaque possimus ullam eius quaerat? Quam aliquam eius corporis ut!</p><img src="https://picsum.photos/400/300" alt="Imagem aleátória"><p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad quisquam amet, sunt, magnam debitis aliquam voluptates eius veniam explicabo molestias enim illo quam exercitationem ducimus vel eos eligendi aut libero.</p><ul><li><a href="https://guithub.com/Luferat">GitHub do Fessô</a></li><li><a href="http://catabits.com.br">Blog do Fessô</a></li><li><a href="https://bit.ly/LuferatMeet">Google Meet do Fessô</a></li></ul><p>Lorem ipsum dolor sit amet consectetur adipisicing elit. At itaque deserunt perferendis sit voluptatum sunt, minus labore ratione modi nesciunt distinctio temporibus amet omnis sapiente, dicta repudiandae ipsum, eaque deleniti!</p><p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptas quos quasi quis pariatur iure officia ab, eius beatae, fuga, in dolores neque possimus necessitatibus nostrum nulla expedita tempore harum tenetur?</p>',
+    '5'
+),
+(
+    'Cortes cortados de cantos arredondados',
+    'Neste artigo aprenderemos a fazer cantos de cortes cortados.',
+    'https://picsum.photos/103',
+    '<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto fugiat, nesciunt iure porro aliquid id consequuntur nisi placeat assumenda vero magni repellendus possimus corporis sed, quaerat totam? Veniam, pariatur ex?</p><p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Inventore sunt quo nam commodi repudiandae voluptas excepturi est aut iste veniam. Itaque possimus ullam eius quaerat? Quam aliquam eius corporis ut!</p><img src="https://picsum.photos/400/300" alt="Imagem aleátória"><p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad quisquam amet, sunt, magnam debitis aliquam voluptates eius veniam explicabo molestias enim illo quam exercitationem ducimus vel eos eligendi aut libero.</p><ul><li><a href="https://guithub.com/Luferat">GitHub do Fessô</a></li><li><a href="http://catabits.com.br">Blog do Fessô</a></li><li><a href="https://bit.ly/LuferatMeet">Google Meet do Fessô</a></li></ul><p>Lorem ipsum dolor sit amet consectetur adipisicing elit. At itaque deserunt perferendis sit voluptatum sunt, minus labore ratione modi nesciunt distinctio temporibus amet omnis sapiente, dicta repudiandae ipsum, eaque deleniti!</p><p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptas quos quasi quis pariatur iure officia ab, eius beatae, fuga, in dolores neque possimus necessitatibus nostrum nulla expedita tempore harum tenetur?</p>',
+    '4'
 );

@@ -2,7 +2,6 @@
 
 /**
  * Arquivo que faz a configuração incial da página.
- * Por exemplo, conecta-se ao banco de dados.
  */
 require($_SERVER['DOCUMENT_ROOT'] . '/_config.php');
 
@@ -10,7 +9,7 @@ require($_SERVER['DOCUMENT_ROOT'] . '/_config.php');
  * Seus códigos PHP desta página iniciam aqui! *
  ***********************************************/
 
-// Processa o formulário, se ele foi enviado
+// Processa o formulário, somente se ele foi enviado...
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Cria e inicializa as variáveis usadas no script
@@ -20,7 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $nome = trim(htmlspecialchars($_POST['nome']));
 
     // Recebe o campo 'email' dor formulário e sanitiza
-    $email = trim(filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL));
+    $email = trim(filter_var($_POST['email'], FILTER_SANITIZE_EMAIL));
 
     // Recebe o campo 'assunto' do formulário e sanitiza
     $assunto = trim(htmlspecialchars($_POST['assunto']));
@@ -105,8 +104,13 @@ Obrigado...
 
 TXT;
 
-        // Enviando e-mail para 'admin@vitugo.com'.
-        // O '@' oculta mensagens de erro. MUITO CUIDADO!!!
+        /**
+         * Enviando e-mail para 'admin@vitugo.com', administrador do site.
+         * 
+         * OBS: não é possível enviar e-mails do XAMPP, do Windows ou da rede escolar usando o PHP.
+         * Usamos o '@' para ocultar mensagens de erro. 
+         * MUITO CUIDADO AO USAR '@' DESTE MODO!!!
+         */
         @mail('admin@vitugo.com', 'Um contato foi enviado.', $mail_message);
     }
 } else {
@@ -124,22 +128,11 @@ TXT;
 
 /**
  * Variável que define o título desta página.
- * Essa variável é usada no arquivo "_header.php".
- * OBS: para a página inicial (index.php) usaremos o 'slogan' do site.
- *     Referências:
- *     → https://www.w3schools.com/php/php_variables.asp
- *     → https://www.php.net/manual/pt_BR/language.variables.basics.php
  */
 $title = "Faça contato";
 
 /**
  * Inclui o cabeçalho da página.
- * A superglobal "$_SERVER['DOCUMENT_ROOT']" retorna o caminho da raiz do site no Windows.
- * Ex.: C:\xampp\htdocs 
- *     Referências:
- *     → https://www.w3schools.com/php/php_includes.asp
- *     → https://www.php.net/manual/pt_BR/function.include.php
- *     → https://www.php.net/manual/pt_BR/language.variables.superglobals.php
  */
 require($_SERVER['DOCUMENT_ROOT'] . '/_header.php');
 
@@ -155,12 +148,13 @@ require($_SERVER['DOCUMENT_ROOT'] . '/_header.php');
 <aside>
 
     <h3>Lateral</h3>
-    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Officia, aperiam corporis culpa consequatur
-        iusto.</p>
+    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Officia, aperiam corporis culpa consequatur iusto.</p>
 
 </aside>
 
 <?php
 
-// Inclui o rodapé da página
+/**
+ * Inclui o rodapé da página.
+ */
 require($_SERVER['DOCUMENT_ROOT'] . '/_footer.php');

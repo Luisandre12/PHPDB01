@@ -1,2 +1,3 @@
 # PHPDB01
- Primeiras atividades com PHP e banco dedados
+
+Aplicativo modelo full-stack usando HTML, CSS, PHP e MySQL.
