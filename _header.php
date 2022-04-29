@@ -33,7 +33,7 @@
 
             <a href="/sobre" title="Sobre..."><i class="fa-solid fa-circle-info fa-fw"></i><span>Sobre</span></a>
 
-            <a href="/usuario" title="Usuário"><i class="fa-solid fa-user fa-fw"></i><span>Usuário</span></a>
+            <a href="/user/login" title="Usuário"><i class="fa-solid fa-right-to-bracket fa-fw"></i><span>Login</span></a>
 
         </nav>
 
