@@ -2,7 +2,7 @@
  * Quando clicar no botão 'id="passToggle"', se ele existe, chama a função 
  * 'togglePassword'.
  */
- if(!!document.getElementById("passToggle")) passToggle.onclick = togglePassword;
+ if (!!document.getElementById("passToggle")) passToggle.onclick = togglePassword;
 
  /**
   * Função que mostra/oculta (toggle) o valor do campo senha do usuário.
@@ -25,5 +25,7 @@
          passToggle.innerHTML = '<i class="fa-solid fa-eye fa-fw"></i>';
  
      }
+ 
+     // Sai da função sem fazer mais nada.
      return false;
  }
