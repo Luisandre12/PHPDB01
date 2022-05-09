@@ -122,8 +122,3 @@ section img {
     margin-bottom: .25rem;
     font-size: .8rem;
 }
-.comment-meta img {
-    width: 100%;
-    max-width: 50px;
-    border-radius: .5rem;
-}

@@ -175,7 +175,6 @@ if ($res->num_rows > 0) :
      
      <div class="comment">
         <div class="comment-meta">
-            <img src="{$cmt['user_photo']}" alt="{$cmt['user_name']}">
             Por {$cmt['user_name']} em {$cmt['cmt_date_br']}.
         </div>
         {$cmt['cmt_comment']}
