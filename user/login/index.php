@@ -72,11 +72,14 @@ SQL;
             // Apaga a senha
             unset($user_data['user_password']);
 
+            // Adiciona expiração do cookie.
+            $user_data['expires'] = $logged;
+
             // Grava o cookie no navegador
             // OBS:  cookies devem ser criados antes de enviar qualquer coisa para o navegador.
             setcookie(
                 'user',                 // nome do cookie criado
-                serialize($user_data),       // valor do cookie
+                serialize($user_data),  // valor do cookie
                 $logged,                // tempo de vida do cookie em segundos
                 '/'                     // Domínio do cookie "/" de localhost
             );
