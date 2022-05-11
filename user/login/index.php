@@ -130,7 +130,6 @@ require($_SERVER['DOCUMENT_ROOT'] . '/_header.php');
         ?>
 
         <p>Logue-se para ter acesso ao conteúdo exclusivo. Se ainda não se cadastrou, <a href="/user/new/">cadastre-se aqui</a>.</p>
-        <small>Senha de teste (apague isso!) &rarr; Qw3rtyui0P</small>
 
         <p>
             <label for="email">E-mail:</label>

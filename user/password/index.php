@@ -149,7 +149,6 @@ require($_SERVER['DOCUMENT_ROOT'] . '/_header.php');
                 <button type="button" id="newPassToggle" data-field="newpassword"><i class="fa-solid fa-eye fa-fw"></i></button>
             <div class="form-help">
                 <ul>
-                    <li>Senha de teste (apague isso!) &rarr; Qw3rtyui0P</li>
                     <li>Mínimo de 7 e máximo de 32 caracteres;</li>
                     <li>Pelo menos uma letra maiúscula de A até Z;</li>
                     <li>Pelo menos um número de 0 à 9.</li>
